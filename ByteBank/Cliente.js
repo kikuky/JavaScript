@@ -3,6 +3,7 @@ export class Cliente{
         return this._cpf;
     }
 
+<<<<<<< HEAD
     constructor(nome, cpf, senha){
         this.nome = nome;
         this._cpf = cpf;
@@ -13,4 +14,10 @@ export class Cliente{
         return true;
     }
 
+=======
+    constructor(nome, cpf){
+        this.nome = nome;
+        this._cpf = cpf;
+    }
+>>>>>>> JavaScript
 }
