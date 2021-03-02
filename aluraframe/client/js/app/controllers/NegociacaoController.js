@@ -2,28 +2,48 @@ class NegociacaoController {
 
     constructor() {
 
-        let $ = document.querySelector.bind(document);//Continua a manter a associação com o document
+        let $ = document.querySelector.bind(document); //bind -> Continua a manter a associação com o document
         this._inputData = $('#data');
         this._inputQuantidade = $('#quantidade');
         this._inputValor = $('#valor');
+        this._listaNegociacoes = new ListaNegociacoes();
+
+        this._negociacoesView = new NegociacoesView($('#negociacoesView'));
+        this._negociacoesView.update(this._listaNegociacoes);
+
+        this._mensagem = new Mensagem();
+        this._mensagemView = new MensagemView($('#mensagemView'));
+        this._mensagemView.update(this._mensagem);
+
+        
 
     }
     
     adiciona(event) {
         event.preventDefault();
 
-        let data = new Date(this._inputData.value.split('-'));  /*.map((item, indice) => item - indice % 2)); 
-                                                                                0 % 2 = 0 / 1 % 2 = 1 / 2 % 2 = 0  
-                                                                                        (ano/mes/dia)
-                                                                                (indice 0)/(indice 1)/(indice 2)
-                                                                                Caso aconteça de estar o mês -1
-                                                                */
-        let negociacao = new Negociacao(
-            data,
+        this._listaNegociacoes.adiciona(this._criaNegociacao());
+        this._negociacoesView.update(this._listaNegociacoes);
+        
+        this._mensagem.texto = 'Negociação adicionada com sucesso!';
+        this._mensagemView.update(this._mensagem);
+
+        this._limpaFormulario();
+    }
+
+    _criaNegociacao() {
+        return new Negociacao(
+            DateHelper.textoParaData(this._inputData.value),
             this._inputQuantidade.value,
             this._inputValor.value
         );
-
-        console.log(negociacao);
     }
+
+    _limpaFormulario() {
+        this._inputData.value = '';
+        this._inputQuantidade.value = '1';
+        this._inputValor.value = '0.0';
+        this._inputData.focus();
+    }
+
 }

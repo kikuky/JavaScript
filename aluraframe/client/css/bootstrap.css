@@ -1446,8 +1446,11 @@ dt,
 dd {
   line-height: 1.42857143;
 }
-dt {
+dt, .total{
   font-weight: bold;
+}
+.total{
+  text-align: center;
 }
 dd {
   margin-left: 0;
