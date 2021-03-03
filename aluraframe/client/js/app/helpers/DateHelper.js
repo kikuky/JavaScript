@@ -1,10 +1,12 @@
 class DateHelper {
 
     constructor() {
+
         throw new Error('Esta classe não pode ser instanciada'); //não pode ser chamada diretamente, apenas seus metodos DateHelper.textoParaData()
     }
 
     static dataParaTexto(data) {
+        
         return `${data.getDate()}/${data.getMonth() + 1}/${data.getFullYear()}`; 
     }
 
